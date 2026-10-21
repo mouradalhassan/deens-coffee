@@ -1,0 +1,8 @@
+node_modules
+dist
+.data
+.env*
+.DS_Store
+.netlify/*
+!.netlify/state.json
+gmail.txt

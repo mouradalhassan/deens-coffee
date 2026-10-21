@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Deen's Coffee Shop — Where Souls Get Caffeinated | Order Online</title>
+  <meta name="description" content="Deen's Coffee Shop: handcrafted espresso, lattes, frappes, iced coffee, matcha, milkshakes, smoothies, desserts and snacks. Browse the full menu and order in seconds via WhatsApp." />
+  <meta name="theme-color" content="#022a2f" />
+  <meta property="og:title" content="Deen's Coffee Shop — Where Souls Get Caffeinated" />
+  <meta property="og:description" content="Browse the full Deen's menu and send your order straight to WhatsApp." />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Fonts are self-hosted (no Google round-trips) and preloaded so the intro never waits on them -->
+  <link rel="preload" href="/fonts/archivo-black.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/jost.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/allura.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Pictures the first screen needs, fetched immediately -->
+  <link rel="preload" href="/images/deens-logo.webp" as="image" fetchpriority="high" />
+  <link rel="preload" href="/images/golden-cup.webp" as="image" fetchpriority="high" />
+  <link rel="preload" href="/images/frappe-pour.webp" as="image" />
+  <link rel="preload" href="/images/iced-latte.webp" as="image" />
+  <script>
+    document.documentElement.classList.replace('no-js', 'js');
+    // Start fetching the saved menu/texts right now, in parallel with the scripts
+    try { window.__deensContent = fetch('/api/content').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); } catch (e) {}
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <!-- Icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-bean" viewBox="0 0 64 64">
+      <g transform="rotate(32 32 32)">
+        <ellipse cx="32" cy="32" rx="19" ry="27" fill="currentColor" />
+        <path d="M30 6c-9 10 9 18 1 28s4 18 3 24" fill="none" stroke="var(--bean-line, #022a2f)" stroke-width="4" stroke-linecap="round" />
+      </g>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Zm3 0V6a3 3 0 0 1 6 0v1" /></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14" /></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M5 12h14" /></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" /></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5" /></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6" /></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6" /></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8h.01" /></g></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.08c-.24.68-1.42 1.3-1.95 1.35-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.53-.34.71-.34l.51.01c.16.01.38-.06.6.46.24.55.79 1.89.86 2.03.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.2 1.36.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.6-.14.25.09 1.57.74 1.84.88.27.14.45.2.52.32.07.11.07.66-.17 1.33Z" /></symbol>
+  </svg>
+
+  <!-- PRELOADER — styled inline to guarantee zero flash of unstyled content -->
+  <div class="preloader" id="preloader" style="position:fixed;inset:0;z-index:99999;background:#022a2f;display:grid;place-items:center;" role="status" aria-live="polite">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="/images/deens-logo.webp" alt="Deen's Coffee Shop logo" width="857" height="803" fetchpriority="high" decoding="async" />
+      <div class="preloader__bar"><div class="preloader__fill" id="preloader-fill"></div></div>
+      <div class="preloader__meta"><span>Brewing Experience</span><span id="preloader-pct">0%</span></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner container-x">
+      <a href="#top" class="brand" id="brand-link" aria-label="Deen's Coffee Shop — back to top">
+        <img class="brand__mark" src="/images/deens-logo.webp" alt="Deen's Coffee Shop" width="857" height="803" />
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a class="nav-link" href="#menu" id="nav-menu">Menu</a>
+        <a class="nav-link" href="#story" id="nav-story">Our Story</a>
+        <a class="nav-link" href="#gallery" id="nav-gallery">Gallery</a>
+        <a class="nav-link" href="#order" id="nav-order">How to Order</a>
+      </nav>
+      <div class="header-actions">
+      <button class="cart-btn" id="cart-toggle" type="button" aria-label="Open your order" aria-controls="cart-drawer" aria-expanded="false">
+        <span class="cart-btn__total" id="cart-total-header">$0</span>
+        <span class="cart-btn__icon">
+          <svg width="18" height="18"><use href="#i-bag" /></svg>
+          <span class="cart-btn__count" id="cart-count">0</span>
+        </span>
+      </button>
+      <button class="burger" id="nav-burger" type="button" aria-label="Open menu" aria-controls="mobile-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a class="mobile-nav__link" href="#menu">Menu</a>
+      <a class="mobile-nav__link" href="#story">Our Story</a>
+      <a class="mobile-nav__link" href="#gallery">Gallery</a>
+      <a class="mobile-nav__link" href="#order">How to Order</a>
+    </nav>
+  </div>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero" aria-label="Welcome to Deen's">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__glow hero__glow--1"></div>
+        <div class="hero__glow hero__glow--2"></div>
+        <svg class="hero__bean hero__bean--1" style="--bean-line:#022a2f"><use href="#i-bean" /></svg>
+        <svg class="hero__bean hero__bean--2" style="--bean-line:#022a2f"><use href="#i-bean" /></svg>
+        <svg class="hero__bean hero__bean--3" style="--bean-line:#022a2f"><use href="#i-bean" /></svg>
+        <svg class="hero__bean hero__bean--4" style="--bean-line:#022a2f"><use href="#i-bean" /></svg>
+      </div>
+
+      <div class="hero__inner container-x">
+        <div class="hero__copy" id="hero-copy">
+          <p class="eyebrow text-gold-300 hero__eyebrow" data-edit="hero.eyebrow" data-label="Hero — small line above title">Deen's Coffee Shop</p>
+          <h1 class="display uppercase hero__title" id="hero-title" data-edit="hero.title" data-label="Hero — big title" data-hl="text-gold-400">Where souls<br />get <span class="text-gold-400">caffeinated.</span></h1>
+          <p class="hero__lead" data-edit="hero.lead" data-label="Hero — sentence under title">Handcrafted coffee, icy creations &amp; sweet treats — poured with soul.</p>
+          <div class="hero__ctas">
+            <a href="#menu" class="btn btn-gold" id="hero-cta-menu"><span data-edit="hero.cta1" data-label="Hero — gold button">View the menu</span> <svg width="18" height="18"><use href="#i-arrow" /></svg></a>
+            <a href="#menu" class="btn btn-ghost" id="hero-cta-order"><span data-edit="hero.cta2" data-label="Hero — second button">Order delivery</span></a>
+          </div>
+          <ul class="hero__perks">
+            <li><span class="hero__perk-dot"></span><span data-edit="hero.perk2" data-label="Hero — perk 2">Delivery</span></li>
+            <li><span class="hero__perk-dot"></span><span data-edit="hero.perk3" data-label="Hero — perk 3">Order on WhatsApp</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__stage">
+        <div class="hero__art" id="hero-art" aria-hidden="true">
+          <div class="hero__ring"></div>
+          <div class="hero__arch" data-depth="0.35">
+            <img src="/images/golden-cup.webp" data-edit-img="hero.main" data-label="Hero — main picture" alt="" width="602" height="770" fetchpriority="high" />
+          </div>
+          <figure class="hero__card hero__card--a" data-depth="1.1">
+            <img src="/images/frappe-pour.webp" data-edit-img="hero.card1" data-label="Hero — small picture (left)" alt="" width="641" height="811" />
+            <figcaption data-edit="hero.card1Label" data-label="Hero — small picture (left) label">Frappe</figcaption>
+          </figure>
+          <figure class="hero__card hero__card--b" data-depth="1.6">
+            <img src="/images/iced-latte.webp" data-edit-img="hero.card2" data-label="Hero — small picture (right)" alt="" width="600" height="735" />
+            <figcaption data-edit="hero.card2Label" data-label="Hero — small picture (right) label">Iced Latte</figcaption>
+          </figure>
+          <div class="hero__badge" data-depth="2">
+            <svg class="badge-ring" viewBox="0 0 100 100"><defs><path id="hero-circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-size="9.5" font-family="Jost" font-weight="600" fill="#022a2f"><textPath href="#hero-circ" textLength="236" lengthAdjust="spacing">SIP · CHILL · REPEAT · SIP · CHILL · REPEAT ·</textPath></text></svg>
+            <svg width="30" height="30" style="--bean-line:#c9a06b" class="text-deen-900"><use href="#i-bean" /></svg>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <a href="#story" class="hero__scroll" aria-label="Scroll down"><span class="hero__scroll-line"></span></a>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <section class="marquee-wrap" aria-label="Menu highlights">
+      <div class="marquee marquee--gold" aria-hidden="true">
+        <div class="marquee__track" data-marquee="Espresso|Latte|Frappe|Iced Coffee|Matcha|Milkshakes|Refreshers|Smoothies" data-marquee-key="marquee.1"></div>
+        <div class="marquee__track" data-marquee="Espresso|Latte|Frappe|Iced Coffee|Matcha|Milkshakes|Refreshers|Smoothies" data-marquee-key="marquee.1"></div>
+      </div>
+      <div class="marquee marquee--cream" aria-hidden="true">
+        <div class="marquee__track" data-marquee="Where Souls Get Caffeinated|Sip Chill Repeat|Golden Warm Irresistible" data-marquee-key="marquee.2"></div>
+        <div class="marquee__track" data-marquee="Where Souls Get Caffeinated|Sip Chill Repeat|Golden Warm Irresistible" data-marquee-key="marquee.2"></div>
+      </div>
+    </section>
+
+    <!-- ================= STORY ================= -->
+    <section class="story py-20 md:py-32" id="story" aria-labelledby="story-title">
+      <div class="container-x relative grid gap-14 lg:grid-cols-2 lg:gap-20 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="stack" id="story-stack">
+            <figure class="stack__img stack__img--1" data-depth="0.6"><img src="/images/golden-cup.webp" data-edit-img="story.img1" data-label="Our Story — big picture" alt="A Deen's teal coffee cup held up with both hands" decoding="async" fetchpriority="low" width="602" height="770" /></figure>
+            <figure class="stack__img stack__img--2" data-depth="1.1"><img src="/images/deens-spread.webp" data-edit-img="story.img2" data-label="Our Story — top right picture" alt="Iced latte, iced matcha, cookie and cappuccino" decoding="async" fetchpriority="low" width="651" height="793" /></figure>
+            <figure class="stack__img stack__img--3" data-depth="0.85"><img src="/images/sip-chill-repeat.webp" data-edit-img="story.img3" data-label="Our Story — bottom right picture" alt="Cappuccino with latte art in a teal ceramic cup" decoding="async" fetchpriority="low" width="592" height="800" /></figure>
+            <div class="stack__badge" aria-hidden="true">
+              <svg class="badge-ring" viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-size="9.5" font-family="Jost" font-weight="600" fill="#022a2f"><textPath href="#circ" textLength="236" lengthAdjust="spacing">SIP · CHILL · REPEAT · SIP · CHILL · REPEAT ·</textPath></text></svg>
+              <svg width="34" height="34" style="--bean-line:#c9a06b" class="text-deen-900"><use href="#i-bean" /></svg>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <p class="eyebrow text-gold-400 mb-5 reveal" data-edit="story.eyebrow" data-label="Our Story — small title">Our Story</p>
+          <h2 class="display text-cream-50 uppercase reveal" id="story-title" style="font-size:clamp(2.1rem,5vw,4.2rem)" data-edit="story.title" data-label="Our Story — big title" data-hl="text-gold-400">Brewed with soul,<br /><span class="text-gold-400">served with love.</span></h2>
+          <p class="script text-gold-300 mt-4 reveal" style="font-size:clamp(2.2rem,4vw,3.4rem)" data-edit="story.script" data-label="Our Story — handwritten line">Sip, chill, repeat.</p>
+          <p class="mt-5 text-lg leading-relaxed text-cream-50/80 max-w-xl reveal" data-edit="story.text" data-label="Our Story — paragraph">At Deen's, every cup starts with selected beans and ends with a smile. From a bold morning espresso to a caramel-drizzled frappe, a bright refresher or a slice of something sweet — we craft each order fresh, the way you like it.</p>
+          <div class="mt-10 grid grid-cols-3 gap-5 max-w-xl reveal">
+            <div class="stat"><div class="stat__num" data-count="items">0</div><div class="stat__label">Menu items</div></div>
+            <div class="stat"><div class="stat__num" data-count="cats">0</div><div class="stat__label">Categories</div></div>
+            <div class="stat"><div class="stat__num">1<span class="text-cream-50/60 text-2xl">tap</span></div><div class="stat__label">To order</div></div>
+          </div>
+          <div class="mt-10 flex flex-wrap gap-3 reveal">
+            <a href="#menu" class="btn btn-gold" id="story-cta-menu"><span data-edit="story.cta" data-label="Our Story — button">Explore the menu</span> <svg width="18" height="18"><use href="#i-arrow" /></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MENU ================= -->
+    <section class="menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="container-x relative pt-20 md:pt-28 pb-10">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+          <div>
+            <p class="eyebrow text-deen-700 mb-5 reveal" data-edit="menu.eyebrow" data-label="Menu — small title">The Menu</p>
+            <h2 class="display uppercase text-deen-800 reveal" id="menu-title" style="font-size:clamp(2.3rem,6vw,5rem)" data-edit="menu.title" data-label="Menu — big title" data-hl="text-gold-600">Crafted for <span class="text-gold-600">every soul.</span></h2>
+            <p class="mt-4 text-deen-900/70 text-lg max-w-xl reveal" data-edit="menu.lead" data-label="Menu — sentence under title">Pick a size, add to your order, and send it to us on WhatsApp in one tap.</p>
+          </div>
+          <label class="search reveal" id="search-wrap">
+            <span class="sr-only">Search the menu</span>
+            <svg width="20" height="20"><use href="#i-search" /></svg>
+            <input type="search" id="menu-search" placeholder="Search lattes, frappes, cakes…" autocomplete="off" enterkeyhint="search" />
+            <button type="button" class="search__clear" id="search-clear" aria-label="Clear search"><svg width="18" height="18"><use href="#i-close" /></svg></button>
+          </label>
+        </div>
+      </div>
+
+      <nav class="cat-nav" id="cat-nav" aria-label="Menu categories">
+        <div class="cat-nav__inner container-x">
+          <button class="cat-nav__arrow" id="cat-prev" type="button" aria-label="Scroll categories left"><svg width="18" height="18"><use href="#i-chev-l" /></svg></button>
+          <div class="cat-nav__scroller" id="cat-scroller"></div>
+          <button class="cat-nav__arrow" id="cat-next" type="button" aria-label="Scroll categories right"><svg width="18" height="18"><use href="#i-chev-r" /></svg></button>
+        </div>
+      </nav>
+
+      <div class="container-x relative pb-24" id="menu-list"></div>
+      <div class="menu-empty container-x" id="menu-empty">
+        <svg width="56" height="56" class="mx-auto text-gold-500" style="--bean-line:#f4e9df"><use href="#i-bean" /></svg>
+        <p class="display text-2xl mt-4 uppercase">No matches found</p>
+        <p class="mt-2 text-deen-900/70">Try another name — e.g. “latte”, “mango” or “cake”.</p>
+      </div>
+    </section>
+
+    <!-- ================= GALLERY ================= -->
+    <section class="gallery py-20 md:py-28" id="gallery" aria-labelledby="gallery-title">
+      <div class="container-x">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <p class="eyebrow text-gold-400 mb-5 reveal" data-edit="gallery.eyebrow" data-label="Gallery — small title">Gallery</p>
+            <h2 class="display uppercase text-cream-50 reveal" id="gallery-title" style="font-size:clamp(2.1rem,5vw,4rem)" data-edit="gallery.title" data-label="Gallery — big title" data-hl="text-gold-400">Golden, warm <span class="text-gold-400">&amp; irresistible.</span></h2>
+          </div>
+          <p class="text-cream-50/70 max-w-sm reveal" data-edit="gallery.lead" data-label="Gallery — sentence">A taste of what's waiting at Deen's — from the first pour to the last crumb.</p>
+        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= HOW TO ORDER ================= -->
+    <section class="order-cta py-20 md:py-28" id="order" aria-labelledby="order-title">
+      <svg class="order-cta__bean" width="420" height="420" style="right:-120px;top:-120px;--bean-line:transparent" aria-hidden="true"><use href="#i-bean" /></svg>
+      <svg class="order-cta__bean" width="260" height="260" style="left:-80px;bottom:-90px;--bean-line:transparent" aria-hidden="true"><use href="#i-bean" /></svg>
+      <div class="container-x relative">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow text-deen-800 mb-5 justify-center reveal" data-edit="order.eyebrow" data-label="How to order — small title">How to order</p>
+          <h2 class="display uppercase text-deen-900 reveal" id="order-title" style="font-size:clamp(2.1rem,5vw,4rem)" data-edit="order.title" data-label="How to order — big title">Three taps to your cup.</h2>
+        </div>
+        <ol class="mt-12 grid gap-5 md:grid-cols-3">
+          <li class="step reveal"><div class="step__num">01</div><h3 class="mt-3 text-xl font-semibold" data-edit="order.s1title" data-label="Step 1 — title">Choose</h3><p class="mt-2 text-deen-900/75" data-edit="order.s1text" data-label="Step 1 — text">Browse the menu and pick your size — 8oz / 12oz or 400 / 500 ml.</p></li>
+          <li class="step reveal"><div class="step__num">02</div><h3 class="mt-3 text-xl font-semibold" data-edit="order.s2title" data-label="Step 2 — title">Delivery details</h3><p class="mt-2 text-deen-900/75" data-edit="order.s2text" data-label="Step 2 — text">Enter your name and delivery address, and we bring your order to your door.</p></li>
+          <li class="step reveal"><div class="step__num">03</div><h3 class="mt-3 text-xl font-semibold" data-edit="order.s3title" data-label="Step 3 — title">Send on WhatsApp</h3><p class="mt-2 text-deen-900/75" data-edit="order.s3text" data-label="Step 3 — text">Checkout opens WhatsApp with your full order written for you. Just tap send.</p></li>
+        </ol>
+        <div class="mt-12 flex flex-wrap justify-center gap-3 reveal">
+          <a href="#menu" class="btn btn-teal" id="order-cta-menu"><span data-edit="order.cta" data-label="How to order — button">Start your order</span> <svg width="18" height="18"><use href="#i-arrow" /></svg></a>
+          <a href="https://wa.me/96170991995" target="_blank" rel="noopener" class="btn btn-wa" id="order-cta-wa" data-wa-link><svg width="20" height="20"><use href="#i-wa" /></svg> Chat with us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer pt-16">
+    <div class="container-x grid gap-10 md:grid-cols-3 pb-12">
+      <div>
+        <img src="/images/deens-logo.webp" alt="Deen's Coffee Shop" width="140" height="131" class="rounded-xl w-[140px] h-auto" decoding="async" />
+        <p class="mt-4 max-w-xs" data-edit="footer.text" data-label="Footer — text under logo">Where souls get caffeinated. Handcrafted drinks and treats, made fresh for you.</p>
+      </div>
+      <div>
+        <h3 class="wide-caps text-gold-400 text-xs mb-4">Explore</h3>
+        <ul class="grid gap-2">
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#order">How to order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="wide-caps text-gold-400 text-xs mb-4">Order &amp; contact</h3>
+        <a href="https://wa.me/96170991995" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-cream-50 text-lg font-medium" id="footer-wa" data-wa-link>
+          <svg width="22" height="22" class="text-[#25d366]"><use href="#i-wa" /></svg> <span data-wa-display>+961 70 991 995</span>
+        </a>
+        <p class="mt-2 text-sm" data-edit="footer.contact" data-label="Footer — line under phone number">Orders are received on WhatsApp.</p>
+      </div>
+    </div>
+    <div class="border-t border-cream-50/10">
+      <div class="container-x py-6 flex flex-col sm:flex-row gap-2 justify-between items-start sm:items-center text-sm">
+        <p>© <span id="year"></span> Deen's Coffee Shop. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <p class="text-cream-50/50">Prices in USD.</p>
+          <button type="button" class="admin-dot" id="admin-open" aria-label="Admin"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5z" /></svg></button>
+        </div>
+      </div>
+      <p class="container-x pb-6 text-center text-xs tracking-[0.2em] uppercase text-cream-50/40">By <span class="text-gold-400">Mourad Al Hassan</span></p>
+    </div>
+  </footer>
+
+  <!-- ================= CART ================= -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="drawer__head">
+      <div>
+        <h2 class="display uppercase text-xl" id="cart-title">Your order</h2>
+        <p class="text-sm text-cream-50/70" id="cart-subtitle">0 items</p>
+      </div>
+      <button class="drawer__close" id="cart-close" type="button" aria-label="Close cart"><svg width="20" height="20"><use href="#i-close" /></svg></button>
+    </div>
+    <div class="drawer__body" id="cart-body">
+      <div id="cart-lines"></div>
+      <div id="cart-empty" class="text-center py-14">
+        <svg width="64" height="64" class="mx-auto text-gold-500" style="--bean-line:#f4e9df"><use href="#i-bean" /></svg>
+        <p class="display uppercase text-xl mt-5">Your cup is empty</p>
+        <p class="mt-2 text-deen-900/70">Add something delicious from the menu.</p>
+        <button type="button" class="btn btn-teal mt-6" id="cart-browse">Browse menu</button>
+      </div>
+
+      <form id="checkout-form" class="mt-6 grid gap-4" novalidate>
+        <h3 class="wide-caps text-xs text-deen-700">Delivery details</h3>
+        <div class="field" id="field-name">
+          <label for="cust-name">Full name *</label>
+          <input id="cust-name" name="name" type="text" autocomplete="name" placeholder="e.g. Ahmad Khalil" required maxlength="60" />
+          <span class="field__error">Please enter your name.</span>
+        </div>
+        <div class="field" id="field-address">
+          <label for="cust-address">Delivery address *</label>
+          <textarea id="cust-address" name="address" autocomplete="street-address" placeholder="Area, street, building, floor…" maxlength="240" rows="2"></textarea>
+          <span class="field__error">Please enter your address.</span>
+        </div>
+        <div class="field" id="field-notes">
+          <label for="cust-notes">Notes (optional)</label>
+          <textarea id="cust-notes" name="notes" placeholder="Less sugar, extra ice, which drink the add-ons are for…" maxlength="400" rows="2"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="drawer__foot" id="cart-foot">
+      <div class="summary-row text-sm text-deen-900/70"><span>Items</span><span id="sum-count">0</span></div>
+      <div class="summary-row mt-1"><span class="font-semibold text-lg">Total</span><span class="display text-2xl text-deen-700" id="sum-total">$0</span></div>
+      <button type="submit" form="checkout-form" class="btn btn-wa w-full mt-4 text-base" id="checkout-btn">
+        <svg width="22" height="22"><use href="#i-wa" /></svg> Checkout on WhatsApp
+      </button>
+      <p class="text-center text-xs text-deen-900/60 mt-2.5">WhatsApp opens with your order ready — just tap send.</p>
+    </div>
+  </aside>
+
+  <button class="cart-bar" id="cart-bar" type="button" aria-label="View your order">
+    <span class="flex items-center gap-2.5 min-w-0">
+      <span class="grid place-items-center w-8 h-8 rounded-full bg-gold-500 text-deen-900 shrink-0"><svg width="16" height="16"><use href="#i-bag" /></svg></span>
+      <span class="truncate text-sm"><strong id="bar-count">0 items</strong> · <span id="bar-total">$0</span></span>
+    </span>
+    <span class="btn btn-gold !py-3 !px-5 !text-sm">View order</span>
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__icon"><svg width="14" height="14"><use href="#i-check" /></svg></span>
+    <span id="toast-text">Added</span>
+  </div>
+
+  <div class="modal" id="sent-modal" role="dialog" aria-modal="true" aria-labelledby="sent-title" aria-hidden="true">
+    <div class="modal__card">
+      <div class="order-number" id="sent-number-wrap">
+        <span class="order-number__label">Your order number</span>
+        <span class="order-number__value" id="sent-number">000</span>
+        <span class="order-number__hint">Mention it if you contact us about this delivery.</span>
+      </div>
+      <h2 class="display uppercase text-2xl" id="sent-title">Almost there!</h2>
+      <p class="mt-3 text-deen-900/75">Your order is written in WhatsApp. <strong>Just tap send</strong> to confirm it with Deen's.</p>
+      <p class="mt-2 text-sm text-deen-900/60">WhatsApp didn't open? <a href="#" id="sent-retry" class="underline text-deen-700 font-semibold" target="_blank" rel="noopener">Tap here</a>.</p>
+      <div class="mt-6 grid gap-2.5">
+        <button type="button" class="btn btn-teal w-full" id="sent-clear">Done — start a new order</button>
+        <button type="button" class="btn w-full text-deen-800 hover:bg-cream-200" id="sent-keep">Keep my cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Floating WhatsApp CTA Button -->
+  <aside class="sticky-wa" id="sticky-wa" aria-label="Quick WhatsApp contact">
+    <a href="https://wa.me/96170991995" target="_blank" rel="noopener" class="sticky-wa__btn" id="sticky-wa-link" data-wa-link aria-label="Chat or order on WhatsApp">
+      <span class="sticky-wa__ripple" aria-hidden="true"></span>
+      <span class="sticky-wa__tooltip">Chat with us</span>
+      <svg width="32" height="32" class="sticky-wa__icon"><use href="#i-wa" /></svg>
+    </a>
+  </aside>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+</body>
+</html>
